@@ -1,0 +1,181 @@
+﻿<div ng-controller="ListController" class="row">
+    
+    <table>
+        <tr>
+            <td colspan="2">
+                <p>
+                    Senior Developer: Hongwei Li <br />
+                    Date: 2017-10-25 <br />
+                    Description: Search and View the sales order with AngularJS, Web Apis and MVC. <br />
+                    I used Microsoft [AdventureWorks2014] database. <br /> <br />
+
+                    The first screen will populate the list with the following first query. <br />
+                    You can search to populate the list .<br />
+                    You can click the Details to go to next screen. <br />
+                    You can click the button with ProductID to see product details. <br />
+                    
+                    <br /> 
+                    These are SQL Store procs test scripts: <br /> <br />
+                    exec dbo.GetSalesOrderInfo <br />
+                    @OrderDateFrom = '3/12/2014', <br />
+                    @OrderDateTo = '3/13/2014', <br />
+                    @DueDateFrom = '3/24/2014', <br />
+                    @DueDateTo = '3/25/2014', <br />
+                    @ShipDateFrom = '3/19/2014', <br />
+                    @ShipDateTo = '3/20/2014', <br />
+                    @CustomerName = null <br /> <br />
+
+                    exec dbo.GetSalesOrderDetail <br />
+                    @SalesOrderID = 68151 <br /> <br />
+
+                    exec dbo.GetProductById <br />
+                    @SalesOrderDetailID = 35253, <br />
+                    @ProductID = 797 
+
+                </p>
+
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label for="idOrderDateFrom">From Date For Order Date: </label>
+                <input type="date" ng-model="OrderDateFrom" id="idOrderDateFrom" required />
+            </td>
+            <td>
+                <label for="idOrderDateTo">To Date For Order Date:</label>
+                <input type="date" ng-model="OrderDateTo" id="idOrderDateTo" required />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="idDueDateFrom">From Date For Due Date: </label>
+                <input type="date" ng-model="DueDateFrom" id="idDueDateFrom" />
+            </td>
+            <td>
+                <label for="idDueDateTo">To Date For Due Date: </label>
+                <input type="date" ng-model="DueDateTo" id="idDueDateTo" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="idShipDateFrom">From Date For Ship Date: </label>
+                <input type="date" ng-model="ShipDateFrom" id="idShipDateFrom" />
+            </td>
+            <td>
+                <label for="idShipDateTo">To Date For Ship Date: </label>
+                <input type="date" ng-model="ShipDateTo" id="idShipDateTo" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="idCustomerName">Customer Name: </label>
+                <input type="text" ng-model="CustomerName" id="idCustomerName" />
+            </td>
+            <td>
+                <button ng-click="SearchIt()"> Search </button>
+            </td>
+        </tr>
+
+    </table> 
+                       
+
+    <table class="table table-striped">
+        <tr>
+            <td>
+                Sales Order ID
+            </td>
+            <td>
+                Customer Name
+            </td>
+            <td>
+                Account Number
+            </td>
+            <td>
+                Ship To Address
+            </td>
+            <td>
+                Ship Method
+            </td>
+            <td>
+                SubTotal
+            </td>
+            <td>
+                Tax
+            </td>
+            <td>
+                Freight
+            </td>
+            <td>
+                Total
+            </td>
+            <td>
+                Order Date
+            </td>
+            <td>
+                Due Date
+            </td>
+
+            <td>
+                Ship Date
+            </td>
+
+            <td>
+                Detail
+            </td>
+
+        </tr>
+
+        <tbody ng-repeat="salesOrder in salesOrders">
+            <tr>
+                <td>
+                    {{salesOrder.id}}
+                </td>
+                <td>
+                    {{salesOrder.customerName}}
+                </td>
+                <td>
+                    {{salesOrder.accountNumber}}
+                </td>
+                <td>
+                    {{salesOrder.shipToAddress}}
+                </td>
+                <td>
+                    {{salesOrder.shipMethod}}
+                </td>
+                <td>
+                    {{salesOrder.subTotal}}
+                </td>
+                <td>
+                    {{salesOrder.tax}}
+                </td>
+                <td>
+                    {{salesOrder.freight}}
+                </td>
+                <td>
+                    {{salesOrder.total}}
+                </td>
+                <td>
+                    {{salesOrder.orderDate |  date : "MM/dd/yyyy"}}
+                </td>
+                <td>
+                    {{salesOrder.dueDate |  date : "MM/dd/yyyy"}}
+                </td>
+
+                <td>
+                    {{salesOrder.shipDate |  date : "MM/dd/yyyy"}}
+                </td>
+
+                <td>
+                    <a href="#/details/{{salesOrder.id}}" class="btn">Details</a>
+                </td>
+            </tr>
+        </tbody>
+    </table> 
+        
+    
+    
+</div>

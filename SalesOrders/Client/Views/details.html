@@ -1,0 +1,68 @@
+﻿<div ng-controller="DetailsController" class="row">
+    <table class="container">
+        <tr class="row panel-heading bgOrg">
+            <td class="col-sm-1 col-xs-12 pull-left"> * </td>
+            <td class="col-sm-2 col-xs-12"> Sales Order Detail ID </td>
+            <td class="col-sm-2 col-xs-12"> ProductID </td>
+            <td class="col-sm-2 col-xs-12"> Sales Order ID </td>
+            <td class="col-sm-2 col-xs-12"> Carrier Tracking Number </td>
+            <td class="col-sm-2 col-xs-12"> Order Qty </td>
+            <td class="col-sm-2 col-xs-12"> Special Offer ID </td>
+            <td class="col-sm-2 col-xs-12"> Unit Price </td>
+            <td class="col-sm-2 col-xs-12"> Unit Price Discount </td>
+            <td class="col-sm-2 col-xs-12"> Line Total </td>
+            <td class="col-sm-2 col-xs-12"> Modified Date </td>
+            
+        </tr>
+
+        <tbody ng-repeat="salesOrderDetail in salesOrderDetails">
+            <tr class="row panel panel-body">
+                <td class="col-xs-1">
+                    <div class="handpointer glyphicon glyphicon-chevron-right" ng-click="collapse($event, {{salesOrderDetail.id}})" target="#view_{{salesOrderDetail.id}}" toggle="collapse"
+                         aria-expanded="false"
+                         ng-if="salesOrderDetail.products!=null"> 
+                    </div>
+                </td>
+                <td> {{salesOrderDetail.id}} </td>
+                <td> <button ng-click="ShowIt({{salesOrderDetail.id}}, {{salesOrderDetail.productID}})">{{salesOrderDetail.productID}}</button></td>
+                <td> {{salesOrderDetail.salesOrderID}}</td>
+                <td> {{salesOrderDetail.carrierTrackingNumber}}</td>
+                <td> {{salesOrderDetail.orderQty}} </td>
+                <td> {{salesOrderDetail.specialOfferID}}</td>
+                <td> {{salesOrderDetail.unitPrice}}</td>
+                <td> {{salesOrderDetail.unitPriceDiscount}}</td>
+                <td> {{salesOrderDetail.lineTotal}}</td>
+                <td> {{salesOrderDetail.modifiedDate |  date : "MM/dd/yyyy" }}</td>
+                
+            </tr>
+
+            <div class="collapse" id="idShow" ng-if="salesOrderDetail.products!=null">
+                <div class="col-sm-offset-1">
+                    <table class="table-condensed responsive-table">
+                        <tr class="row">
+                            <th>ProductID</th>
+                            <th>Name </th>
+                            <th>Product Number </th>
+                            <th>Quantity </th>
+                            <th>UnitPrice </th>
+                            <th>Discount </th>
+                            <th>LineTotal </th>                            
+                        </tr>
+                        <tr class="row" ng-repeat="product in products">
+                            <td> {{product.id}}</td>
+                            <td> {{product.name}}</td>
+                            <td> {{product.productNumber}}</td>
+                            <td> {{product.quantity}}</td>
+                            <td> {{product.unitPrice}}</td>
+                            <td> {{product.discount}} </td>
+                            <td> {{product.lineTotal}}</td>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </tbody>
+    </table>          
+      
+    
+</div>
